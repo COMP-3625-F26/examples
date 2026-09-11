@@ -18,4 +18,4 @@ for step in range(150):
     print(f"reward: {reward}, cumulative reward: {cumulative_reward}")
     
 # print the true reward probabilities for mines 0 and 1
-print('reward probabilities for mine 0/1 were:', game.reward_probabilities)
+print('The true reward probabilities for mine 0/1 were:', game.reward_probabilities)
