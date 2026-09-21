@@ -32,8 +32,14 @@ def plot_2d_surface(function, x_lims, y_lims, n=100):
 
 plot_2d_surface(himmelblaus_function, [-5, 5], [-5, 5])
 
-result = minimize(himmelblaus_function, x0=[0, 0], method='CG')
+test_pts =[]
+def obj_fun_wrapper(input_vector):
+    test_pts.append(input_vector)
+    return himmelblaus_function(input_vector)
+
+result = minimize(obj_fun_wrapper, x0=[0, 0], method='CG')
 print(result)
 
-
+for pt in test_pts:
+    plt.scatter(pt[0], pt[1], c='r')
 plt.show()
