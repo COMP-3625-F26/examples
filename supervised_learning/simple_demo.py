@@ -29,6 +29,9 @@ ax[0].set_ylabel(features_to_keep[1])
 
 # fit a decision tree model to the data
 model = DecisionTreeClassifier(criterion='entropy', max_depth=2)
+# model = LogisticRegression()
+# model = KNeighborsClassifier(n_neighbors=5) # try other numbers of neighbors
+# model = SVC()
 model.fit(X=X, y=y)
 
 # plot the learned decision tree
