@@ -9,18 +9,19 @@ mdp = ThreeStateMDP()
 state, _ = mdp.reset()
 actions = mdp.get_actions(state)
 
-Q = pd.DataFrame(columns=[0,1])
+Q = pd.DataFrame()
 gamma = 0.9
 alpha = 0.1
 
-for step in range(1000):
+
+for step in range(3000):
     action = np.random.choice(actions)
     new_state, reward, _, _, _ = mdp.step(action)
 
     if state not in Q.index:
-        Q.loc[state, [0, 1]] = 0
+        Q.loc[state, mdp.get_actions(state)] = 0
     if new_state not in Q.index:
-        Q.loc[new_state, [0, 1]] = 0
+        Q.loc[new_state, mdp.get_actions(new_state)] = 0
 
     # td_error ← r + 𝛾•maxa’(Q[s’, a’]) - Q[s, a]
     rpe = (reward + gamma * Q.loc[new_state].max()) - Q.loc[state, action]
