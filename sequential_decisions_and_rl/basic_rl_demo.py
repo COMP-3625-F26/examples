@@ -12,14 +12,18 @@ actions = mdp.get_actions(state)
 Q = pd.DataFrame()
 gamma = 0.9
 alpha = 0.1
-
+epsilon = 0.1
 
 for step in range(3000):
-    action = np.random.choice(actions)
-    new_state, reward, _, _, _ = mdp.step(action)
-
     if state not in Q.index:
         Q.loc[state, mdp.get_actions(state)] = 0
+
+    if np.random.random() < epsilon:
+        action = np.random.choice(actions)
+    else:
+        action = Q.loc[state].idxmax()
+    new_state, reward, _, _, _ = mdp.step(action)
+
     if new_state not in Q.index:
         Q.loc[new_state, mdp.get_actions(new_state)] = 0
 
