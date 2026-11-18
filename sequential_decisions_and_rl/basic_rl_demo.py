@@ -1,11 +1,11 @@
 # from slide #10 in deck #9
 
-from environments import ThreeStateMDP
+from environments import TwoStateMDP
 import pandas as pd
 import numpy as np
 
 
-mdp = ThreeStateMDP()
+mdp = TwoStateMDP()
 state, _ = mdp.reset()
 actions = mdp.get_actions(state)
 
